@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+  
+  <h1>SwapWich</h1>
+  <p>Swap your lunch with somebody nearby!</p>
+  <h3>Step 1. Tell us what you brought for lunch.</h3>
+  <div id='user-info'>
+    <form id='meal-form'>
+      Meal Name:<br>
+      <input type='text' name='meal-name' placeholder='Give your meal a name!'>
+      <br><br>
+      Description:<br>
+      <textarea rows='5' cols='50' placeholder='Tell us about you meal...'></textarea>
+      <br><br>
+      Category:<br>
+      <select name='category'>
+        <option value=''disabled selected>Select one</option>
+        <option value='carnivore'>Carnivore's Delight</option>
+        <option value='vegatarian'>Vegatarian</option>
+        <option value='vegan'>Vegan</option>
+      </select>
+      <br><br>
+      <input type='submit' value='Create Meal!'>
+    </form>
+  </div>
+
+  <!-- New div form -->
+  <div id='lunch-finder'>
+  </div>
+
+  <!-- New div to display all lunches -->
+  <div id='all-lunches'>
+  </div>
+
+<script src='./src/User.js' defer></script>
+<script src='./src/Meal.js' defer></script>
+<script src='./src/index.js' defer></script>
+
+</body>
+</html>
