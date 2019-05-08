@@ -1,27 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+  <link rel='stylesheet' href='style.css'/>
 </head>
 <body>
   
   <h1>SwapWich</h1>
   <p>Swap your lunch with somebody nearby!</p>
   <h3>Step 1. Tell us what you brought for lunch.</h3>
-  <div id='user-info'>
+  <div id='meal-info'>
     <form id='meal-form'>
       Meal Name:<br>
-      <input type='text' name='meal-name' placeholder='Give your meal a name!'>
+      <input type='text' name='meal-name' placeholder='Give your meal a name!' required>
+      <br><br>
+      Is this meal hot or cold?<br>
+      <select name='hot' required>
+        <option value='' disabled selected>Select</option>
+        <option value='true'>Hot</option>
+        <option value='false'>Cold</option>
+      </select>
       <br><br>
       Description:<br>
-      <textarea rows='5' cols='50' placeholder='Tell us about you meal...'></textarea>
+      <textarea rows='5' cols='50' placeholder='Tell us about you meal...' required></textarea>
+      <br><br>
+      Show us a picture!<br>
+      <input type='text' name='meal-img' placeholder="Enter your picture's URL" required>
       <br><br>
       Category:<br>
-      <select name='category'>
+      <select name='category' required>
         <option value=''disabled selected>Select one</option>
-        <option value='carnivore'>Carnivore's Delight</option>
-        <option value='vegatarian'>Vegatarian</option>
-        <option value='vegan'>Vegan</option>
+        <option value='Vegatarian'>Vegatarian</option>
+        <option value='Vegan'>Vegan</option>
+        <option value='Chicken'>Chicken</option>
+        <option value='Beef'>Beef</option>
+        <option value='Pork'>Pork</option>
+        <option value='Turkey'>Turkey</option>
+        <option value='Fish'>Fish</option>
       </select>
       <br><br>
       <input type='submit' value='Create Meal!'>
@@ -29,15 +43,15 @@
   </div>
 
   <!-- New div form -->
-  <div id='lunch-finder'>
+  <div id='meal-finder'>
   </div>
 
   <!-- New div to display all lunches -->
-  <div id='all-lunches'>
+  <div id='all-meals'>
   </div>
 
-<script src='./src/User.js' defer></script>
-<script src='./src/Meal.js' defer></script>
+<!-- <script src='./src/User.js' defer></script> -->
+<!-- <script src='./src/Meal.js' defer></script> -->
 <script src='./src/index.js' defer></script>
 
 </body>
