@@ -1,20 +1,31 @@
 let CURRENTUSER = {id: 2, name: 'BurgerTron2000'}
 const CATAGORIES = ['Vegetarian', 'Vegan', 'Chicken', 'Beef', 'Pork', 'Turkey', 'Fish']
 
+// document.addEventListener('DOMContentLoaded',()=>{
+//
+// })
+
+fetchMeals()
+
 function fetchUsers() {
     fetch('http://localhost:3000/users')
     .then(resp => resp.json())
-    // .then(obj => obj)
-    .then(obj => console.log('fetch users', obj))
+    .then(obj => renderUsers(obj))
+    // .then(obj => console.log('fetch users', obj))
 }
 
-function fetchMeals() {
+  function fetchMeals(category,type){
     fetch('http://localhost:3000/meals')
     .then(resp => resp.json())
-    // .then(obj => renderMeals(obj))
-    .then(obj => console.log('fetch meals', obj))
+    .then((meals) => printObj(meals,category,type))
   }
-  
+
+  function printObj(meals,category,type){
+    meals.forEach((meal)=>{
+      console.log(meal)
+    })
+  }
+
   function createMeal(obj) {
     fetch('http://localhost:3000/meals', {
       method: 'POST',
@@ -92,10 +103,10 @@ function renderSearch() {
   h3.innerText = 'Step 2: Tell us what you\'d like to eat!'
 
   let form = document.createElement('form')
-  
+
   let categoryInput = document.createElement('select')
   categoryInput.name = 'category'
-  
+
   let opt1 = document.createElement('option')
   opt1.value = ''
   opt1.innerText = 'Any'
@@ -108,7 +119,7 @@ function renderSearch() {
     op.innerText = type
     categoryInput.appendChild(op)
   })
-  
+
   let hotInput = document.createElement('select')
   hotInput.name = 'hot'
 
@@ -131,7 +142,7 @@ function renderSearch() {
 
   let submitInput = document.createElement('input')
   submitInput.setAttribute('type', 'submit')
-  
+
   form.addEventListener('submit', renderMeals)
   form.appendChild(categoryInput)
   form.appendChild(hotInput)
@@ -154,8 +165,9 @@ function renderMeals(e) {
   let h3 = document.createElement('h3')
   h3.innerText = 'Step 3: Find something tasty!'
   div.appendChild(h3)
-  
-  fetchMeals()
+  category = e.target.category.value
+  type = e.target.hot.value
+  let filtered = fetchMeals(category,type)
   // attach filter to event listener on meal search
   createMealCard()
 }
@@ -199,6 +211,3 @@ function handleSwap(e) {
 }
 
 // CSS FORMATTING
-
-fetchUsers()
-fetchMeals()
