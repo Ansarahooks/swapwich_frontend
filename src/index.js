@@ -1,17 +1,35 @@
-let CURRENTUSER   = {id: 2, name: 'BurgerTron2000'}
-const CATAGORIES  = ['Vegetarian', 'Vegan', 'Chicken', 'Beef', 'Pork', 'Turkey', 'Fish']
+
+let CURRENTUSER = {}
+const CATAGORIES = ['Vegetarian', 'Vegan', 'Chicken', 'Beef', 'Pork', 'Turkey', 'Fish']
 let ALLMEALS      = []
-  
-  function fetchUsers() {
-    fetch('http://localhost:3000/users')
+
+  document.getElementById('meal-info').style.display = 'none';
+  document.getElementById('login-form').addEventListener('submit', handleUserForm)
+
+  function handleUserForm(e) {
+    e.preventDefault()
+    let newUser = {}
+    newUser.name = e.target[0].value
+    document.getElementById("login-form").style.display = 'none';
+    document.getElementById('meal-info').style.display = 'block';
+    createUser(newUser)
+  }
+
+  function createUser(obj) {
+    fetch('http://localhost:3000/users', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(obj)
+    })
     .then(resp => resp.json())
-    .then(obj => renderUsers(obj))
+    .then(obj => CURRENTUSER = obj)
   }
   
   function fetchMeals(category, hot){
     fetch('http://localhost:3000/meals')
     .then(resp => resp.json())
     .then(meals => filterMeals(meals, category, hot))
+
   }
   
   function createMealCard(obj) {    
