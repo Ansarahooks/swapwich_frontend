@@ -1,14 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel='stylesheet' href='style.css'/>
+  <style>
+    #color {
+      color: green;
+    }
+    #user-info {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+  <!-- <link rel='stylesheet' href='style.css'/> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
 </head>
 <body>
 
-  <h1>SwapWich</h1>
-  <p>Swap your lunch with somebody nearby!</p>
-  <h3>Step 1. Tell us what you brought for lunch.</h3>
-  <div id='meal-info'>
+  <div class='column is-centered'>
+    <h1 id='color' class='title is-size-1 has-text-centered'>SwapWich</h1>
+    <p class="subtitle is-4 has-text-centered">Swap your lunch with somebody nearby!</p>
+  </div><br>
+
+  <div id='login-form' class='column is-centered'>
+    <div class='column is-half'>
+    <form id='user-info' class='box'>
+      <h1 class='subtitle is-5'>Login to access your account.</h1>
+      <h3>Username</h3>
+      <input class='input' type='text' name='user-name' placeholder='e.g. johnDoe'required>
+      <h3>Password</h3>
+      <input class='input' type='text' name='password' placeholder='Must be 6-10 characters'>
+      <br><br>
+      <input class='button is-rounded is-primary is-fullwidth' type='submit' value='Login'>
+    </form>
+  </div>
+  </div>
+
+  <div id='meal-info' class='column is-centered'>
+    <h3 class='has-text-weight-semibold'>Step 1. Tell us what you brought for lunch.</h3><br>
     <form id='meal-form'>
       Meal Name:<br>
       <input type='text' name='meal-name' placeholder='Give your meal a name!' required>
@@ -38,7 +67,7 @@
         <option value='Fish'>Fish</option>
       </select>
       <br><br>
-      <input type='submit' value='Create Meal!'>
+      <input class='button is-rounded is-success' type='submit' value='Create Meal!'>
     </form>
   </div>
 
