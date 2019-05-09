@@ -8,40 +8,41 @@ let ALLMEALS      = []
     .then(obj => renderUsers(obj))
   }
   
-  function fetchMeals(){
-    ALLMEALS = []
+  function fetchMeals(category, hot){
     fetch('http://localhost:3000/meals')
     .then(resp => resp.json())
-    .then(meals => meals.forEach(meal => createMealCard(meal)))
+    .then(meals => filterMeals(meals, category, hot))
   }
   
   function createMealCard(obj) {    
-    let mealCard = document.createElement('div')
+    console.log('createMealCard is going', obj)
+    let mealCard                = document.createElement('div')
       mealCard.className        = 'card'
       mealCard.dataset.id       = obj.id
       mealCard.dataset.category = obj.category
       mealCard.dataset.hot      = obj.hot
     
-    let mealName = document.createElement('h4')
-      mealName.innerText = obj.name
+    let mealName          = document.createElement('h4')
+      mealName.innerText  = obj.name
     mealCard.appendChild(mealName)
     
-    let mealIMG = document.createElement('img')
+    let mealIMG         = document.createElement('img')
       mealIMG.src       = obj.img_url
       mealIMG.className = 'card-image'
     mealCard.appendChild(mealIMG)
     
-    let mealDescription = document.createElement('p')
+    let mealDescription         = document.createElement('p')
       mealDescription.innerText = obj.description
     mealCard.appendChild(mealDescription)
     
-    let swapButton = document.createElement('button')
-      swapButton.innerText = 'Request Swap!'
+    let swapButton          = document.createElement('button')
+      swapButton.innerText  = 'Request Swap!'
       swapButton.dataset.id = obj.id
       swapButton.addEventListener('click', handleSwap)
     mealCard.appendChild(swapButton)
     
-    ALLMEALS.push(mealCard)
+    const div = document.querySelector('#all-meals')
+    div.appendChild(mealCard)
   }
 
 function createMeal(obj) {
@@ -58,7 +59,7 @@ function createMeal(obj) {
   
   function handleMealForm(e) {
     e.preventDefault()
-    let newMeal={}
+    let newMeal           = {}
       newMeal.user_id     = CURRENTUSER.id
       newMeal.name        = e.target[0].value
       newMeal.hot         = e.target[1].value
@@ -67,7 +68,7 @@ function createMeal(obj) {
       newMeal.category    = e.target[4].value
     // createMeal(newMeal)
     e.target.reset()
-    renderUserMeal(newMeal)
+    // renderUserMeal(newMeal)
     renderSearch()
   }
   
@@ -81,15 +82,15 @@ function createMeal(obj) {
     const parent = document.getElementById('meal-info')
     killChildren(parent)
     
-    let name = document.createElement('h3')
-    name.innerText = obj.name
+    let name        = document.createElement('h3')
+    name.innerText  = obj.name
     
-    let img = document.createElement('img')
-    img.src = obj.img_url
-    img.className = 'user-image'
+    let img         = document.createElement('img')
+      img.src       = obj.img_url
+      img.className = 'user-image'
     
-    let desc = document.createElement('p')
-    desc.innerText = `Description: ${obj.description}`
+    let desc        = document.createElement('p')
+    desc.innerText  = `Description: ${obj.description}`
     
     let ul = document.createElement('ul')
     
@@ -101,7 +102,7 @@ function createMeal(obj) {
       hot.innerText = 'Cold'
     }
     
-    let cat = document.createElement('li')
+    let cat       = document.createElement('li')
     cat.innerText = obj.category
     
     ul.appendChild(cat)
@@ -121,43 +122,43 @@ function createMeal(obj) {
     let form = document.createElement('form')
     
     let categoryInput     = document.createElement('select')
-    categoryInput.name  = 'category'
+      categoryInput.name  = 'category'
     
     let opt1          = document.createElement('option')
-    opt1.value      = ''
-    opt1.innerText  = 'Any'
-    opt1.selected
+      opt1.value      = ''
+      opt1.innerText  = 'Any'
+      opt1.selected
     categoryInput.appendChild(opt1)
     
     CATAGORIES.forEach(type => {
-      let op          = document.createElement('option')
+      let op        = document.createElement('option')
       op.value      = type
       op.innerText  = type
       categoryInput.appendChild(op)
     })
     
     let hotInput    = document.createElement('select')
-    hotInput.name = 'hot'
+      hotInput.name = 'hot'
     
     let opt2          = document.createElement('option')
-    opt2.value      = ''
-    opt2.innerText  = 'Any'
-    opt2.selected
+      opt2.value      = ''
+      opt2.innerText  = 'Any'
+      opt2.selected
     hotInput.appendChild(opt2)
     
-    let hotHot          = document.createElement('option')
+    let hotHot        = document.createElement('option')
     hotHot.value      = true
     hotHot.innerText  = 'Hot'
     hotInput.appendChild(hotHot)
     
-    let hotCold         = document.createElement('option')
+    let hotCold       = document.createElement('option')
     hotCold.value     = false
     hotCold.innerText = 'Cold'
     hotInput.appendChild(hotCold)
     
     
     let submitInput = document.createElement('input')
-    submitInput.setAttribute('type', 'submit')
+      submitInput.setAttribute('type', 'submit')
     
     form.addEventListener('submit', renderMeals)
     form.appendChild(categoryInput)
@@ -179,32 +180,39 @@ function createMeal(obj) {
     e.preventDefault()
     const div = document.querySelector('#all-meals')
     
-    let h3          = document.createElement('h3')
+    let h3        = document.createElement('h3')
     h3.innerText  = 'Step 3: Find something tasty!'
     div.appendChild(h3)
     
-    category  = e.target.category.value
-    hot       = e.target.hot.value
+    let category  = e.target.category.value
+    let hot       = e.target.hot.value
     
     killChildren(div)
-    fetchMeals()
-    console.log('all meal cards', ALLMEALS)
+
     console.log('category and hot choice', category, hot)
-    filterMeals(category, hot)
-  }
+
+    fetchMeals(category, hot)
+  }  
   
-  
-function filterMeals(category=null, hot=null){
-  filteredMeals = ALLMEALS
+function filterMeals(meals, category, hot='empty'){
+  let filteredMeals = meals
+  console.log('filterMeals is going', filteredMeals)
   const div = document.querySelector('#all-meals')
+
     if (category) {
-      filteredMeals = filteredMeals.filter(meal => meal.dataset.category == category)
+      filteredMeals = filteredMeals.filter(meal => meal.category === category)
     }
-    console.log('filtered meals after catagory', filteredMeals)
-    if (hot != null) {
-      filteredMeals = filteredMeals.filter(meal => meal.dataset.hot == hot)
+    console.log('category filter done', filteredMeals)
+    if (hot == 'empty') {console.log('hot is undefined')}
+    else if (hot == true){
+      filteredMeals = filteredMeals.filter(meal => meal.hot)
     }
-  filteredMeals.forEach(mealObj => div.appendChild(mealObj))
+    else {
+      console.log('checking hot', hot)
+      filteredMeals = filteredMeals.filter(meal => !(meal.hot))
+    }
+    console.log('filterMeals is done', filteredMeals)
+  filteredMeals.forEach(mealObj => createMealCard(mealObj))
 }
 
 // revise meal display function to iterate through fetch response
