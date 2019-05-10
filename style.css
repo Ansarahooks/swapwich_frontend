@@ -3,8 +3,25 @@
     max-width:300px;
 }
 
-.card-image {
-    width:100%;
-    max-width:200px;
+#color {
+  color: green;
+}
+#user-info {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
+.card-image {
+  width: 75%;
+  height: 300px;
+}
+
+.display-meals {
+  display: inline;
+  float: left;
+  width: 33.33%;
+  height: 300px;
+  /* padding: 10px; */
+}

@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    #color {
-      color: green;
-    }
-    #user-info {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  </style>
-  <!-- <link rel='stylesheet' href='style.css'/> -->
+  <link rel='stylesheet' href='style.css'/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
 </head>
 <body>
@@ -40,23 +29,23 @@
     <h3 class='has-text-weight-semibold'>Step 1. Tell us what you brought for lunch.</h3><br>
     <form id='meal-form'>
       Meal Name:<br>
-      <input type='text' name='meal-name' placeholder='Give your meal a name!' required>
+      <input type='text' name='meal-name' placeholder='Give your meal a name!' >
       <br><br>
       Is this meal hot or cold?<br>
-      <select name='hot' required>
+      <select name='hot' >
         <option value='' disabled selected>Select</option>
         <option value='true'>Hot</option>
         <option value='false'>Cold</option>
       </select>
       <br><br>
       Description:<br>
-      <textarea rows='5' cols='50' placeholder='Tell us about you meal...' required></textarea>
+      <textarea rows='5' cols='50' placeholder='Tell us about you meal...' ></textarea>
       <br><br>
       Show us a picture!<br>
-      <input type='text' name='meal-img' placeholder="Enter your picture's URL" required>
+      <input type='text' name='meal-img' placeholder="Enter your picture's URL" >
       <br><br>
       Category:<br>
-      <select name='category' required>
+      <select name='category' >
         <option value=''disabled selected>Select one</option>
         <option value='Vegatarian'>Vegatarian</option>
         <option value='Vegan'>Vegan</option>
