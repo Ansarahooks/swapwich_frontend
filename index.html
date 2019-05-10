@@ -29,23 +29,23 @@
     <h3 class='has-text-weight-semibold'>Step 1. Tell us what you brought for lunch.</h3><br>
     <form id='meal-form'>
       Meal Name:<br>
-      <input type='text' name='meal-name' placeholder='Give your meal a name!' >
+      <input type='text' name='meal-name' placeholder='Give your meal a name!' required>
       <br><br>
       Is this meal hot or cold?<br>
-      <select name='hot' >
+      <select name='hot' required>
         <option value='' disabled selected>Select</option>
         <option value='true'>Hot</option>
         <option value='false'>Cold</option>
       </select>
       <br><br>
       Description:<br>
-      <textarea rows='5' cols='50' placeholder='Tell us about you meal...' ></textarea>
+      <textarea rows='5' cols='50' placeholder='Tell us about you meal...' required></textarea>
       <br><br>
       Show us a picture!<br>
-      <input type='text' name='meal-img' placeholder="Enter your picture's URL" >
+      <input type='text' name='meal-img' placeholder="Enter your picture's URL" required>
       <br><br>
       Category:<br>
-      <select name='category' >
+      <select name='category' required>
         <option value=''disabled selected>Select one</option>
         <option value='Vegatarian'>Vegatarian</option>
         <option value='Vegan'>Vegan</option>
